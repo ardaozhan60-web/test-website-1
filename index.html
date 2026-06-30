@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kolay Bilgi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { font-family: 'Segoe UI', sans-serif; background: #fff; color: #111; transition: background 0.3s, color 0.3s; }
+    body.dark { background: #0f1117; color: #fff; }
+
+    /* NAVBAR */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 1px solid #e5e7eb; }
+    body.dark nav { border-color: #1e2130; }
+    .logo { font-size: 20px; font-weight: 700; color: #2563eb; text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-right a { text-decoration: none; color: inherit; font-size: 15px; }
+    .btn-primary { background: #2563eb; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-weight: 600; }
+    .toggle { cursor: pointer; font-size: 22px; background: none; border: none; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 100px 20px 80px; background: linear-gradient(to bottom, #f0f4ff, #fff); }
+    body.dark .hero { background: linear-gradient(to bottom, #0d1526, #0f1117); }
+    .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 16px; }
+    .hero p { font-size: 18px; color: #6b7280; margin-bottom: 36px; }
+    body.dark .hero p { color: #9ca3af; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline { padding: 12px 24px; border: 1.5px solid #d1d5db; border-radius: 8px; background: transparent; font-size: 15px; cursor: pointer; color: inherit; }
+    .btn-blue { padding: 12px 24px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: 600; }
+
+    /* İSTATİSTİK */
+    .stats { background: #2563eb; color: #fff; display: flex; justify-content: center; gap: 80px; padding: 40px 20px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat h2 { font-size: 36px; font-weight: 800; }
+    .stat p { font-size: 14px; margin-top: 4px; opacity: 0.85; }
+
+    /* NASIL ÇALIŞIR */
+    .how { padding: 80px 40px; text-align: center; }
+    .how h2 { font-size: 28px; font-weight: 700; margin-bottom: 48px; }
+    .steps { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .step { max-width: 200px; }
+    .step-num { width: 44px; height: 44px; background: #2563eb; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; margin: 0 auto 16px; }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: #6b7280; }
+    body.dark .step p { color: #9ca3af; }
+
+    /* KATEGORİLER */
+    .categories { background: #2563eb; padding: 60px 40px; text-align: center; }
+    .categories h2 { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 32px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+    .card { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 24px; text-align: left; color: #fff; cursor: pointer; transition: background 0.2s; }
+    .card:hover { background: rgba(255,255,255,0.25); }
+    .card-icon { font-size: 28px; margin-bottom: 10px; }
+    .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .card p { font-size: 13px; opacity: 0.85; }
+
+    /* SSS */
+    .faq { padding: 80px 40px; max-width: 800px; margin: 0 auto; }
+    .faq h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .faq-item { border-bottom: 1px solid #e5e7eb; padding: 18px 0; cursor: pointer; }
+    body.dark .faq-item { border-color: #1e2130; }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; }
+    .faq-a { font-size: 14px; color: #6b7280; margin-top: 10px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* KAYIT FORMU */
+    .signup { padding: 80px 20px; text-align: center; background: #f9fafb; }
+    body.dark .signup { background: #161b27; }
+    .signup h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .signup p { color: #6b7280; margin-bottom: 28px; }
+    .signup form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto; }
+    .signup input { padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; background: #fff; }
+    body.dark .signup input { background: #1e2130; border-color: #2d3348; color: #fff; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 24px; font-size: 13px; color: #9ca3af; border-top: 1px solid #e5e7eb; }
+    body.dark footer { border-color: #1e2130; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 16px; padding: 32px; width: 360px; position: relative; }
+    body.dark .modal { background: #1a1f2e; }
+    .modal-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+    .modal-tab { padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 15px; font-weight: 600; background: transparent; color: #6b7280; }
+    .modal-tab.active { background: #2563eb; color: #fff; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #9ca3af; }
+    .btn-google { width: 100%; padding: 12px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; }
+    body.dark .btn-google { background: #1e2130; border-color: #2d3348; color: #fff; }
+    .divider { text-align: center; color: #9ca3af; font-size: 13px; margin-bottom: 16px; position: relative; }
+    .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: #e5e7eb; }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    body.dark .divider::before, body.dark .divider::after { background: #2d3348; }
+    .modal input { width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; margin-bottom: 12px; background: #fff; }
+    body.dark .modal input { background: #1e2130; border-color: #2d3348; color: #fff; }
+
+    @media (max-width: 768px) {
+      .cards { grid-template-columns: 1fr; }
+      .stats { gap: 40px; }
+      nav { padding: 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="#">Kolay Bilgi</a>
+    <div class="nav-right">
+      <a href="#">Hakkında</a>
+      <a href="#" class="btn-primary" onclick="openModal()">Başla</a>
+      <button class="toggle" onclick="toggleTheme()" id="themeBtn">🌙☀️</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Kolayca Öğren.</h1>
+    <p>Her konuyu basit ve anlaşılır şekilde öğrenmek için<br>doğru yerdesin.</p>
+    <div class="hero-btns">
+      <button class="btn-blue" onclick="openModal()">Hemen Başla</button>
+      <button class="btn-outline">Konuları Keşfet</button>
+    </div>
+  </section>
+
+  <!-- İSTATİSTİK -->
+  <section class="stats">
+    <div class="stat"><h2>500+</h2><p>Konu</p></div>
+    <div class="stat"><h2>10K+</h2><p>Kullanıcı</p></div>
+    <div class="stat"><h2>50+</h2><p>Kategori</p></div>
+    <div class="stat"><h2>100%</h2><p>Ücretsiz</p></div>
+  </section>
+
+  <!-- NASIL ÇALIŞIR -->
+  <section class="how">
+    <h2>Nasıl Çalışır?</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Konunu Seç</h3><p>Öğrenmek istediğin konuyu listeden bul.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Dersi Oku</h3><p>Kısa ve anlaşılır açıklamayı oku.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Pekiştir</h3><p>Pratik sorularla öğrendiklerini sağlamlaştır.</p></div>
+    </div>
+  </section>
+
+  <!-- KATEGORİLER -->
+  <section class="categories">
+    <h2>Ne Öğrenmek İstiyorsun?</h2>
+    <div class="cards">
+      <div class="card"><div class="card-icon">💡</div><h3>Temel Kavramlar</h3><p>Her konunun özünü hızlıca öğren.</p></div>
+      <div class="card"><div class="card-icon">📚</div><h3>Kısa Dersler</h3><p>5 dakikada bir konuyu bitir.</p></div>
+      <div class="card"><div class="card-icon">🎯</div><h3>Pratik Sorular</h3><p>Öğrendiklerini pekiştir.</p></div>
+      <div class="card"><div class="card-icon">🚀</div><h3>Hızlı İlerleme</h3><p>Adım adım, kolay kolay ilerle.</p></div>
+      <div class="card"><div class="card-icon">🔍</div><h3>Konu Ara</h3><p>İstediğin konuyu anında bul.</p></div>
+      <div class="card"><div class="card-icon">✅</div><h3>İlerleme Takibi</h3><p>Nerede olduğunu her zaman gör.</p></div>
+    </div>
+  </section>
+
+  <!-- SSS -->
+  <section class="faq">
+    <h2>Sık Sorulan Sorular</h2>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Kolay Bilgi ücretsiz mi? <span>+</span></div>
+      <div class="faq-a">Evet, Kolay Bilgi tamamen ücretsizdir.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Kayıt olmak zorunlu mu? <span>+</span></div>
+      <div class="faq-a">Hayır, kayıt olmadan da içeriklere erişebilirsin. Ancak ilerleme takibi için kayıt önerilir.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Hangi konular var? <span>+</span></div>
+      <div class="faq-a">Matematik, fen, tarih, teknoloji ve daha fazlası. 50+ kategoride 500+ konu mevcut.</div>
+    </div>
+  </section>
+
+  <!-- KAYIT FORMU -->
+  <section class="signup">
+    <h2>Hemen Kaydol</h2>
+    <p>Ücretsiz kayıt ol, ilerleni takip et.</p>
+    <form onsubmit="return false;">
+      <input type="text" placeholder="Adın" />
+      <input type="email" placeholder="E-posta adresin" />
+      <button class="btn-blue" style="padding:14px;">Kaydol</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>© 2026 Kolay Bilgi — Tüm hakları saklıdır.</footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-tabs">
+        <button class="modal-tab active">Giriş Yap</button>
+        <button class="modal-tab">Kayıt Ol</button>
+      </div>
+      <button class="btn-google">
+        <img src="https://www.google.com/favicon.ico" width="18"> Google ile Giriş Yap
+      </button>
+      <div class="divider">veya</div>
+      <input type="email" placeholder="E-posta adresin" />
+      <button class="btn-blue" style="width:100%;padding:12px;">Giriş Yap</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+
+    function openModal() {
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    function toggleFaq(el) {
+      el.classList.toggle('open');
+    }
+
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+  </script>
+</body>
+</html>
